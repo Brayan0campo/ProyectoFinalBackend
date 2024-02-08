@@ -41,7 +41,7 @@ import ProductsMongo from "./dao/mongo/products.mongo.js";
 
 // Express and Initialization
 const app = express();
-const port = config.PORT;
+const port = process.env.PORT;
 const usersMongo = new UsersMongo();
 const cartsMongo = new CartsMongo();
 const ticketsMongo = new TicketsMongo();
@@ -74,7 +74,7 @@ app.use(
 
 // MongoDB Connection
 mongoose
-  .connect(config.MONGO_URL, {
+  .connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

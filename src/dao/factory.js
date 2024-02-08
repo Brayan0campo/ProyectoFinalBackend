@@ -3,9 +3,9 @@ import config from "../config/config.js";
 
 export let Carts, Products, Users, Tickets;
 
-switch (config.PERSISTENCE) {
+switch (process.env.PERSISTENCE) {
   case "MONGO":
-    const connection = mongoose.connect(config.MONGO_URL);
+    const connection = mongoose.connect(process.env.MONGO_URL);
     const { default: CartsMongo } = await import("./mongo/carts.mongo.js");
     const { default: ProductsMongo } = await import(
       "./mongo/products.mongo.js"

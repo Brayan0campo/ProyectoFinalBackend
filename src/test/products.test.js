@@ -5,7 +5,7 @@ import * as Chai from "chai";
 import Supertest from "supertest";
 import config from "../config/config.js";
 
-mongoose.connect(config.mongo_url);
+mongoose.connect(process.env.MONGO_URL);
 
 const assert = Assert.strict;
 const expect = Chai.expect;

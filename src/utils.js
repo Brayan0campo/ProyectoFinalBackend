@@ -61,8 +61,8 @@ export const roleAuthorization = (role) => {
 export const transport = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: config.EMAIL_USER,
-    pass: config.EMAIL_PASS,
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
   },
 });
 

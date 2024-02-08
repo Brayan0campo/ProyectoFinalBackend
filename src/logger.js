@@ -21,4 +21,5 @@ const prodLogger = winston.createLogger({
   ],
 });
 
-export const logger = config.NODE_ENV === "production" ? prodLogger : devLogger;
+export const logger =
+  process.env.NODE_ENV === "production" ? prodLogger : devLogger;
