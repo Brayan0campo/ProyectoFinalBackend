@@ -1,9 +1,9 @@
 import { Carts, Products, Tickets, Users } from "../dao/factory.js";
 
-import UserRepository from "./Users.repository.js";
-import CartRepository from "./Carts.repository.js";
-import TicketRepository from "./Tickets.repository.js";
-import ProductRepository from "./Products.repository.js";
+import UserRepository from "./users.repository.js";
+import CartRepository from "./carts.repository.js";
+import TicketRepository from "./tickets.repository.js";
+import ProductRepository from "./products.repository.js";
 
 export const cartsService = new CartRepository(new Carts());
 export const usersService = new UserRepository(new Users());
