@@ -1,0 +1,122 @@
+paths:
+  /carts:
+    get:
+      summary: "Retrieve All Carts"
+      tags:
+        - Carts Methods
+      responses:
+        "200":
+          description: "Carts retrieved successfully"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "./API Documentation/src/docs/carts-schema.yaml"
+        "500":
+          description: "Internal server error"
+          content:
+            application/json:
+              example:
+                status: error
+                payload:
+                  message: "error retrieving carts"
+    post:
+      summary: "Create a new cart"
+      tags:
+        - Carts Methods
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: "Email of the user"
+                products:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      productId:
+                        type: string
+                        description: "ID of the product"
+                      quantity:
+                        type: integer
+                        description: "Quantity of the product"
+                  description: "Array of products to add to the cart"
+              required:
+                - email
+                - products
+      responses:
+        "200":
+          description: "Cart created successfully"
+        "500":
+          description: "Internal server error"
+          content:
+            application/json:
+              example:
+                status: error
+                payload:
+                  message: "error retrieving carts"
+  /carts/{cid}/purchase:
+    post:
+      summary: "Purchase a cart"
+      tags:
+        - Carts Methods
+      parameters:
+        - in: path
+          name: cid
+          required: true
+          schema:
+            type: string
+          description: "ID of the cart to purchase"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                productos:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      description:
+                        type: string
+                        description: "Description of the product"
+                      image:
+                        type: string
+                        description: "URL of the product image"
+                      price:
+                        type: number
+                        description: "Price of the product"
+                      stock:
+                        type: integer
+                        description: "Stock of the product"
+                      category:
+                        type: string
+                        description: "Category of the product"
+                      availability:
+                        type: string
+                        enum: ["in_stock", "out_of_stock"]
+                        description: "Availability of the product"
+                  description: "Array of products to purchase"
+                correo:
+                  type: string
+                  description: "Email of the user"
+              required:
+                - productos
+                - correo
+      responses:
+        "200":
+          description: "Cart purchased successfully"
+        "300":
+          description: "Insufficient stock of the product"
+        "401":
+          description: "Cart not found with the provided ID"
+        "500":
+          description: "Internal server error to purchase the cart"

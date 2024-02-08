@@ -1,0 +1,48 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detalle Producto</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <a href="/current">Seguir comprando</a>
+    Carrito de usuario
+    {{user}}
+    <div class="product-details">
+      <p>Carrito ID: {{carts._id}}</p>
+      <h2>Productos en el carrito:</h2>
+      <ul>
+        {{#each carts.products}}
+          <li>
+            <p>Producto ID: {{this.productId._id}}</p>
+            <p>Descripción: {{this.productId.description}}</p>
+            <p>Precio: ${{this.productId.price}}</p>
+            <p>Cantidad: {{this.quantity}}</p>
+            <p>Total Item: ${{this.total}}</p>
+          </li>
+        {{/each}}
+      </ul>
+      <p>Suma Total: ${{calculateSumTotal carts.products}}</p>
+      <p id="totalPriceDisplay"></p>
+      <form action="/checkout" method="GET">
+        {{#each carts.products}}
+          <input
+            type="hidden"
+            name="products[]"
+            value="{{this.productId._id}}"
+          />
+          <input type="hidden" name="quantities[]" value="{{this.quantity}}" />
+        {{/each}}
+        <input type="hidden" name="cartId" value="{{carts._id}}" />
+        <input type="hidden" name="purchaser" value="{{user}}" />
+        <input
+          type="hidden"
+          name="totalPrice"
+          value="{{calculateSumTotal carts.products}}"
+        />
+        <button type="submit">Completar Compra</button>
+      </form>
+    </div>
+  </body>
+</html>

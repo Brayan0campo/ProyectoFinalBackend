@@ -1,0 +1,31 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+  </head>
+  <body>
+    <h1>Página de Ingreso</h1>
+    <form id="loginForm">
+      <input
+        type="text"
+        name="email"
+        id="email"
+        placeholder="Ingrese correo electrónico"
+      />
+      <input
+        type="password"
+        name="password"
+        id="password"
+        placeholder="Ingrese contraseña"
+      />
+      <button type="submit">Iniciar sesión</button>
+      <button type="button" id="forgotPasswordButton">Recuperar contraseña</button>
+      <label id="lblRecuperacion"></label>
+    </form>
+    <div id="containerLink">
+      <a href="/register">Registrarse</a>
+    </div>
+    <script src="/login.js"></script>
+  </body>
+</html>

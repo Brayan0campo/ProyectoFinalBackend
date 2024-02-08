@@ -1,0 +1,68 @@
+paths:
+  /products:
+    get:
+      summary: "Retrieves all products"
+      tags:
+        - Products Methods
+      responses:
+        "200":
+          description: "Products retrieved successfully"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "./API Documentation/src/docs/products-schema.yaml"
+        "500":
+          description: "Internal server error"
+          content:
+            application/json:
+              example:
+                status: error
+                payload:
+                  message: "error retrieving products"
+    post:
+      summary: "Create a new product"
+      tags:
+        - Products Methods
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                  description: "Description of the product"
+                image:
+                  type: string
+                  description: "URL of the product image"
+                price:
+                  type: number
+                  description: "Price of the product"
+                stock:
+                  type: number
+                  description: "Stock of the product"
+                category:
+                  type: string
+                  description: "Category of the product"
+                availability:
+                  type: string
+                  description: "Availability of the product"
+                owner:
+                  type: string
+                  description: "Owner of the product"
+              required:
+                - description
+                - image
+                - price
+                - stock
+                - category
+                - availability
+                - owner
+      responses:
+        "200":
+          description: "Product created successfully"
+        "500":
+          description: "Internal server error"

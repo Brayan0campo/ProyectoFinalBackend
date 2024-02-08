@@ -1,0 +1,97 @@
+<div class="container">
+  <div id="containerButtons">
+    <h1>Administración de Usuarios</h1>
+    <button id="backButton">Volver</button>
+  </div>
+  <div id="containerProducts">
+    <div class="infoUser">
+      <h1>Lista de Usuarios</h1>
+      <div class="detalleUser">
+        <div id="usersContainer">
+          <ul>
+            {{#each users}}
+              <li
+                data-name="{{this.first_name}}"
+                data-email="{{this.email}}"
+                data-rol="{{this.rol}}"
+                data-id="{{this._id}}"
+              >
+                Id:
+                {{this._id}}<br />
+                Nombre:{{this.first_name}}<br />
+                Email:
+                {{this.email}}<br />
+                Rol:
+                {{this.rol}}<br /><br />
+              </li>
+            {{/each}}
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="formulario">
+      <h1>Formulario de Usuarios</h1>
+      <form id="user-form">
+        <input type="hidden" id="userId" name="userId" />
+        <div class="inputs" style="display: flex; flex-direction:column;">
+          <div>
+            <input
+              type="text"
+              id="name"
+              autocomplete="off"
+              placeholder="Ingrese Nombre"
+              required
+            />
+            <input
+              type="text"
+              id="email"
+              autocomplete="off"
+              placeholder="Ingrese Email"
+              required
+            />
+          </div>
+          <div>
+            <select name="rol" id="rol" id="rol" style="width: 200px;">
+              <option value="admin" selected>Admin</option>
+              <option value="usuario">Usuario</option>
+              <option value="premium">Premium</option>
+            </select>
+          </div>
+        </div>
+        <label
+          style="font-size: 17px; font-weight:bold; color:brown; margin: 10px;"
+        >
+          *Para eliminar o actualizar, seleccione el usuario de la lista
+        </label>
+        <div class="botones">
+          <button type="submit" id="btnCrear">Guardar</button>
+          <label>
+            <input type="checkbox" id="eliminarUser" name="eliminarProducto" />
+            Eliminar
+          </label>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<script>
+  document.getElementById('backButton').addEventListener('click', accesoUser);
+  function accesoUser() {; window.location.href = '/admin'; }
+  document.addEventListener("DOMContentLoaded", function () { const usersList =
+  document.getElementById("usersContainer"); const nameInput =
+  document.getElementById("name"); const emailInput =
+  document.getElementById("email"); const rolInput =
+  document.getElementById("rol"); const idInput =
+  document.getElementById("userId"); usersList.addEventListener("click",
+  function (event) { const clickedElement = event.target; if
+  (clickedElement.tagName === "LI") { const name =
+  clickedElement.getAttribute("data-name"); const email =
+  clickedElement.getAttribute("data-email"); const rol =
+  clickedElement.getAttribute("data-rol"); const userId =
+  clickedElement.getAttribute("data-id"); nameInput.value = name;
+  emailInput.value = email; for (let i = 0; i < rolInput.options.length; i++) {
+  if (rolInput.options[i].value === rol) { rolInput.selectedIndex = i; break; }
+  } idInput.value = userId; } }); });
+</script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/realTimeUser.js"></script>

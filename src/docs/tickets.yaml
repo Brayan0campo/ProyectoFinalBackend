@@ -1,0 +1,48 @@
+paths:
+  /tickets:
+    get:
+      summary: "Retrieves all tickets"
+      tags:
+        - Tickets Methods
+      responses:
+        "200":
+          description: "Tickets retrieved successfully"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "./API Documentation/src/docs/tickets-schema.yaml"
+        "500":
+          description: "Internal server error"
+          content:
+            application/json:
+              example:
+                status: error
+                payload:
+                  message: "error retrieving tickets"
+    post:
+      summary: "Create a new ticket"
+      tags:
+        - Tickets Methods
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: number
+                  description: "Amount of the ticket"
+                purchaser:
+                  type: string
+                  description: "Purchaser of the ticket"
+              required:
+                - amount
+                - purchaser
+      responses:
+        "200":
+          description: "Ticket created successfully"
+        "500":
+          description: "Internal server error"
